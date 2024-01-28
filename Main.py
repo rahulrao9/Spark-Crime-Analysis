@@ -17,7 +17,6 @@ all_cases = cases_2012.union(cases_2013).union(cases_2014)
 cases_state_key = spark.read.csv(cases_state_key_path, header=True, inferSchema=True)
 
 ################################################################
-# T 1.1
 # merge state_code and year to be on the safer side and get the required state names by joining
 all_cases = all_cases.withColumn("yr_state_code", concat(all_cases["year"], all_cases["state_code"]))
 all_cases = all_cases.na.drop(subset=["year", "state_code"])
@@ -36,7 +35,6 @@ top_10_states_df = spark.createDataFrame(top_10_states)
 
 
 ################################################################
-# T 1.2
 # Read judges data and judge-case merge data
 judges_clean = spark.read.csv(judges_clean_path, header=True, inferSchema=True)
 judge_case_merge_key = spark.read.csv(judge_case_merge_key_path, header=True, inferSchema=True)
